@@ -1,0 +1,9 @@
+<div class="flex justify-center items-center h-screen">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="p-6 bg-white shadow-md rounded-lg w-96">
+      <h2 class="text-xl font-bold mb-4">Login</h2>
+      <input type="email" placeholder="Email" formControlName="email" class="w-full p-2 mb-3 border rounded-md" />
+      <input type="password" placeholder="Password" formControlName="password" class="w-full p-2 mb-3 border rounded-md" />
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md">Login</button>
+    </form>
+  </div>
+  

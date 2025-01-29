@@ -1,0 +1,23 @@
+<nav class="bg-gray-800 p-4 text-white flex justify-between items-center">
+  <div class="text-lg font-bold">
+    <a routerLink="/" class="text-white hover:underline">MyStore</a>
+  </div>
+
+  <div class="space-x-4">
+    <a routerLink="/products" class="hover:underline" routerLinkActive="text-blue-500">Products</a>
+    <a routerLink="/about" class="hover:underline" routerLinkActive="text-blue-500">About</a>
+
+    <button (click)="router.navigate(['/cart'])" class="relative">
+      🛒 Cart 
+      <span *ngIf="cartCount > 0" class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 rounded-full">
+        {{ cartCount }}
+      </span>
+    </button>
+
+    <button *ngIf="isLoggedIn; else loginButton" (click)="logout()" class="ml-4 bg-red-500 px-4 py-2 rounded">Logout</button>
+    
+    <ng-template #loginButton>
+      <a routerLink="/auth/login" class="ml-4 bg-blue-500 px-4 py-2 rounded">Login</a>
+    </ng-template>
+  </div>
+</nav>
