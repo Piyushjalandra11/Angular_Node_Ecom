@@ -1,0 +1,26 @@
+<div class="p-6">
+    <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
+  
+    <form (submit)="placeOrder()">
+      <!-- Name -->
+      <label class="block mb-2">Full Name</label>
+      <input type="text" [(ngModel)]="checkoutData.name" class="w-full p-2 border rounded-md mb-4" required />
+  
+      <!-- Address -->
+      <label class="block mb-2">Address</label>
+      <textarea [(ngModel)]="checkoutData.address" class="w-full p-2 border rounded-md mb-4" required></textarea>
+  
+      <!-- Payment Method -->
+      <label class="block mb-2">Payment Method</label>
+      <select [(ngModel)]="checkoutData.paymentMethod" class="w-full p-2 border rounded-md mb-4">
+        <option value="cod">Cash on Delivery</option>
+        <option value="card">Credit/Debit Card</option>
+      </select>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="bg-green-500 text-white p-2 rounded-md w-full">
+        Place Order
+      </button>
+    </form>
+  </div>
+  

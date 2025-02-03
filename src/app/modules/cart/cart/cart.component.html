@@ -4,18 +4,54 @@
       <p>No items in cart.</p>
     </div>
   
-    <div *ngFor="let item of cartItems" class="border-b py-4">
+    <div *ngFor="let item of cartItems; let i = index"  class="border-b py-4 flex items-center">
       <img [src]="item.image" alt="{{ item.title }}" class="w-20 inline-block mr-4" />
       <span>{{ item.title }}</span> - ${{ item.price }}
-      <button (click)="removeFromCart(item.id)" class="bg-red-500 text-white p-2 ml-4 rounded-md">
+
+      <div class="flex items-center ml-4">
+        <button (click)="updateQuantity(i, -1)" class="bg-gray-300 px-2 py-1 rounded-md">-</button>
+        <span class="mx-2">{{ item.quantity }}</span>
+        <button (click)="updateQuantity(i, 1)" class="bg-gray-300 px-2 py-1 rounded-md">+</button>
+      </div>
+
+      <button (click)="confirmRemoveItem(item.id)" class="bg-red-500 text-white p-2 ml-4 rounded-md">
         Remove
       </button>
     </div>
   
     <div *ngIf="cartItems.length > 0" class="mt-4">
       <h3 class="text-xl font-semibold">Total: ${{ total }}</h3>
-      <button class="bg-green-500 text-white p-2 rounded-md">Proceed to Checkout</button>
-      <button (click)="clearCart()" class="bg-gray-500 text-white p-2 ml-2 rounded-md">Clear Cart</button>
+      <div class="flex justify-center mt-2">
+        <a routerLink="/checkout" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer">
+          Proceed to Checkout
+        </a>
+        <button (click)="confirmClearCart()" class="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">
+          Clear Cart 
+        </button>
+      </div>
+    </div>
+    
+
+    <!-- Remove Item Confirmation Modal -->
+    <div *ngIf="itemToRemove !== null" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+      <div class="bg-white p-6 rounded-md">
+        <p>Are you sure you want to remove this item?</p>
+        <div class="flex justify-end mt-4">
+          <button (click)="itemToRemove = null" class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">Cancel</button>
+          <button (click)="removeFromCart(itemToRemove)" class="bg-red-500 text-white px-4 py-2 rounded-md">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear Cart Confirmation Modal -->
+    <div *ngIf="showClearCartModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+      <div class="bg-white p-6 rounded-md">
+        <p>Are you sure you want to clear the cart?</p>
+        <div class="flex justify-end mt-4">
+          <button (click)="showClearCartModal = false" class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">Cancel</button>
+          <button (click)="clearCart()" class="bg-red-500 text-white px-4 py-2 rounded-md">Clear</button>
+        </div>
+      </div>
     </div>
   </div>
   

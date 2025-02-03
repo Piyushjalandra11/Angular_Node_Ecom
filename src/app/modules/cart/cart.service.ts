@@ -22,7 +22,7 @@ export class CartService {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
-  }
+  } 
 
   // Get All Cart Items
   getCartItems() {
@@ -33,8 +33,10 @@ export class CartService {
   addToCart(product: any) {
     let cart = this.getCartFromLocalStorage();
     cart.push(product);
-    this.saveCartToLocalStorage(cart);
-    this.cart.next(cart); // Notify subscribers
+    cart.push({ ...product, quantity: 1 });
+    this.updateCart(cart); 
+    // this.saveCartToLocalStorage(cart);
+    // this.cart.next(cart); // Notify subscribers
   }
 
   // Remove from Cart
@@ -49,5 +51,9 @@ export class CartService {
   clearCart() {
     this.saveCartToLocalStorage([]);
     this.cart.next([]); // Notify subscribers
+  }
+  updateCart(updatedCart: any[]) {
+    this.saveCartToLocalStorage(updatedCart);
+    this.cart.next(updatedCart); // Notify subscribers (Navbar, Cart Page, etc.)
   }
 }
