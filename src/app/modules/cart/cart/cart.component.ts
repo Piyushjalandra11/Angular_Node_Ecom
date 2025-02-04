@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,8 +15,9 @@ export class CartComponent implements OnInit {
   total: number = 0;
   itemToRemove: number | null = null;
   showClearCartModal: boolean = false;
+ 
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService , private router: Router) {}
 
   ngOnInit() {
     this.cartService.getCartItems().subscribe((items) => {
@@ -28,6 +30,10 @@ export class CartComponent implements OnInit {
       this.cartItems = Array.from(uniqueItems.values());
       this.calculateTotal();
     });
+  }
+
+  goToCheckout() {
+    this.router.navigate(['/checkout']); 
   }
 
   confirmRemoveItem(productId: number){

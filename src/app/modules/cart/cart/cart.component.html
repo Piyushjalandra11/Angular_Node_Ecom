@@ -22,9 +22,9 @@
     <div *ngIf="cartItems.length > 0" class="mt-4">
       <h3 class="text-xl font-semibold">Total: ${{ total }}</h3>
       <div class="flex justify-center mt-2">
-        <a routerLink="/checkout" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer">
+        <button  (click)="goToCheckout()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer">
           Proceed to Checkout
-        </a>
+        </button>
         <button (click)="confirmClearCart()" class="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">
           Clear Cart 
         </button>
